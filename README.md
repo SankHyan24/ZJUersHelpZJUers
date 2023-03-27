@@ -1,5 +1,5 @@
 # ZJUers Help ZJUers
-A application for ZJUers to help ZJUers!
+An application for ZJUers to help ZJUers!
 
 ## For Devs:
 run `make debug` to start the server in debug mode.
