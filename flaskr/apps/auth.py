@@ -5,7 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flaskr.db import get_db
+from flaskr.db import get_db,get_user_name
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -26,16 +26,22 @@ def login_required(view):
 def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
     the database into ``g.user``."""
-    user_id = session.get("user_id")
+    user_uid = session.get("user_uid")
 
-    if user_id is None:
+    if user_uid is None:
         g.user = None
     else:
         db=get_db()
-        db.execute("SELECT * FROM user WHERE UID = \"{}\"".format(user_id))
-        g.user = (
-            db.fetchone()
-        )
+        db.execute("SELECT * FROM user WHERE UID = \"{}\"".format(user_uid))
+        uid, password_hashed, email  = db.fetchone()
+        
+        g.user = {
+            "uid": uid,
+            "email": email,
+            "password_hashed": password_hashed
+        }
+        g.user["username"] = get_user_name(g.user["uid"])
+       
 
 
 @bp.route("/register", methods=("GET", "POST"))
@@ -92,7 +98,7 @@ def login():
         if error is None:
             # store the user id in a new session and return to the index
             session.clear()
-            session["user_id"] = user_UID
+            session["user_uid"] = user_UID
             return redirect(url_for("index"))
 
         flash(error)
