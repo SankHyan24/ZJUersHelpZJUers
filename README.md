@@ -13,6 +13,8 @@ For Backend Developers:
 - 几把，安装python环境要按requirements.txt里的版本
 - 在Makefile里面写东佬
 
+pipreqs --force --encoding=utf8 --savepath requirements.txt
+pip install -r requirements.txt
 
 TODO LIST:
 - [x] 1. 一个简单的登录界面
