@@ -23,6 +23,15 @@ def get_db():
         ).cursor()
     return g.db
 
+def get_user_name(uid):
+    """
+    Get the user's name by id.
+    """
+    db = get_db()
+    db.execute("SELECT userName FROM userInfo WHERE UID = \"{}\"".format(uid))
+    username=db.fetchone()
+    return username
+
 def close_db(e=None):
     db = g.pop('db', None)
     if db is not None:
