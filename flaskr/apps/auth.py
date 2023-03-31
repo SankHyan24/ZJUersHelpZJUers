@@ -31,72 +31,71 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
+        db=get_db()
+        db.execute("SELECT * FROM user WHERE UID = \"{}\"".format(user_id))
         g.user = (
-            get_db().execute("SELECT * FROM UID WHERE id = ?", (user_id,)).fetchone()
+            db.fetchone()
         )
 
-bp.route("/register", methods=("GET", "POST"))
-def register():
-    """Register a new user.
 
-    Validates that the username is not already taken. Hashes the
-    password for security.
-    """
+@bp.route("/register", methods=("GET", "POST"))
+def register():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        email = request.form["email"]
+        password = generate_password_hash(request.form["password"])
+        print("password: ",password," len: ",len(password))
         db = get_db()
+        query = "INSERT INTO user (email, password) VALUES (\"{}\",\"{}\")".format(email,password)
+        # todo : set UID auto increment, set the password length to 102
         error = None
 
-        if not username:
-            error = "Username is required."
+        if not email:
+            error = "Email is required."
         elif not password:
             error = "Password is required."
 
         if error is None:
             try:
-                db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
-                )
-                db.commit()
+                db.execute(query)
+                db.connection.commit()
             except db.IntegrityError:
-                # The username was already taken, which caused the
+                # The email was already taken, which caused the
                 # commit to fail. Show a validation error.
-                error = f"User {username} is already registered."
+                error = f"EMAIL: {email} is already registered."
             else:
                 # Success, go to the login page.
                 return redirect(url_for("auth.login"))
 
         flash(error)
-
     return render_template("auth/register.html")
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
     """Log in a registered user by adding the user id to the session."""
     if request.method == "POST":
-        username = request.form["username"]
+        email = request.form["email"]
         password = request.form["password"]
         db = get_db()
         error = None
-        user = db.execute(
-            "SELECT * FROM user WHERE username = ?", (username,)
-        ).fetchone()
-
-        if user is None:
-            error = "Incorrect username."
-        elif not check_password_hash(user["password"], password):
-            error = "Incorrect password."
+        query = "SELECT * FROM user WHERE email=\"{s}\"".format(s=email)
+        
+        db.execute(query)
+        result=db.fetchone()
+        print(result)
+        if result is None:
+            error = "Incorrect email."
+        else:
+            user_UID, user_password_hashed, user_email  = result
+            if not check_password_hash( user_password_hashed, password):
+                error = "Incorrect password."
 
         if error is None:
             # store the user id in a new session and return to the index
             session.clear()
-            session["user_id"] = user["id"]
+            session["user_id"] = user_UID
             return redirect(url_for("index"))
 
         flash(error)
-
     return render_template("auth/login.html")
 
 
