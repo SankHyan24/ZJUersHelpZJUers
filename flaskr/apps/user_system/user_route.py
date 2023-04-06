@@ -17,3 +17,18 @@ def info_modify():
             print(form_modify.errors, "Error Message")
 
             return render_template("info.html",info_form=form_modify)
+        
+@route("/register",method=["GET","POST"])
+def info_register():
+    if request.method == 'GET':
+        form = RegistrationForm()
+        return render_template('',form_register=form_register) # TODO
+
+    if request.method == 'POST':
+        form = RegistrationForm()
+        if form.validate():
+            info_register(session['user_id'], form.data)
+            return redirect(url_for('auth.login'))
+        else:
+            print(form.errors, "Error Message")
+            return render_template('',form_register=form_register) # TODO
