@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}User Info{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div id = "back">
+    <div id="left">
+        <span>user avatar</span><br>
+        <img id="ava" src = "../../static/2.jpg"></img>
+        <br><hr><br>
+        <button id="avabutton">修改个人信息</button><br>
+        <button id="avabutton">查看历史订单</button><br>
+        <button id="avabutton">还有什么来着</button><br>
+    </div>
+    <div id="left">
+        <h2>我的个人信息</h2>
+        <div><span>用户昵称: _ _ _</span></div>
+        <div><span>联系方式: _ _ _</span></div>
+        <div><span>性别: _ _ _</span></div>
+        <div><span>常驻校区: _ _ _</span></div>
+    </div>
+</div>
+<div id="back" style="background-color: rgba(0,0,0,0);height: auto;min-height: 5%;">
+    <br><hr>
+    <span style="display: block;width:100%;font-size: small; text-align: center;">如有问题请联系: 123456789 @川</span>
+</div>
+<!--<form method="post">
+  <label for="email">Email</label>
+  <input name="email" id="email" required>
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" required>
+  <input id = "demo" type="submit" value="Log In">
+</form>
+-->
+{% endblock %}

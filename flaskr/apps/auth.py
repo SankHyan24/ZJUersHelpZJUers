@@ -42,7 +42,9 @@ def load_logged_in_user():
         }
         g.user["username"] = get_user_name(g.user["uid"])
        
-
+@bp.route("/userinfo", methods=("GET", "POST"))
+def userinfo():
+    return render_template("auth/userinfo.html")
 
 @bp.route("/register", methods=("GET", "POST"))
 def register():
