@@ -41,7 +41,9 @@ def index(pageNumber):
 @bp.route("/search_order/<token>",methods=["GET"])
 def search_order(token):
     search_result_form=get_search_result(token)
-    return render_template('search.html',search_result_form=search_result_form)
+    print("order_rout: search_result\n")
+    print(search_result_form)
+    return render_template('order/search_order.html',search_result_form=search_result_form)
 
 
     

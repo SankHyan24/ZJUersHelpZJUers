@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Create Order{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+    {% for order in search_result_form %}
+    <div class="single_order">
+    <p>
+        <span>startTime:{{ order[1][0] }}    ||    </span>
+        <span>dueTime:{{ order[1][1] }}</span>
+    </p>
+    <p>
+        <span>remark:{{ order[1][2] }}  ||  </span>
+        <span>location:{{ order[1][3] }}  ||  </span>
+        <span>moneyNum:{{ order[1][4] }}  ||  </span>
+        <span>chuanCoinsNum:{{ order[1][5] }}</span>
+    </p>
+    </div>
+    {% endfor %}
+    
+{% endblock %}
