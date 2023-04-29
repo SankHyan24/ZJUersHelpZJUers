@@ -54,6 +54,7 @@ def load_logged_in_user():
             "password_hashed": password_hashed
             
         }
+<<<<<<< HEAD
         g.userInfo = {
             "UserInfoID,":sc_UserInfoID,
             "avatarUrl,":sc_avatarUrl,
@@ -68,6 +69,9 @@ def load_logged_in_user():
         }
         
         g.user["username"] = get_user_name(g.user["uid"])
+=======
+        g.user["username"] = get_user_name(g.user["uid"])[0]
+>>>>>>> 75ff503a137d79997b6dfded6229f138ee331de3
        
 @bp.route("/userinfo", methods=("GET", "POST"))
 def userinfo():
