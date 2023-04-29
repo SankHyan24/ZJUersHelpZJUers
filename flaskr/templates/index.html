@@ -19,8 +19,8 @@
   <header>
     {% block header %}{% endblock %}
   </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
+  {% for order in g.order %}
+    <div class="single_order">{{ message }}</div>
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
