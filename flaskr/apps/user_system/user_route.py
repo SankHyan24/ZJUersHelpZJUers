@@ -33,7 +33,7 @@ def userinfo():
         form_modify = InfoModifyForm(formdata=request.form)
         if form_modify.validate():
             infoModify(session['user_uid'], form_modify.data)
-            return redirect("user/userinfo.html")
+            return redirect(url_for("user.userinfo"))
         else:
             print(form_modify.errors, "Error Message")
-            return render_template("user/userinfo.html",form_modify=form_modify)
+            return render_template("auth/userinfo.html",form_modify=form_modify)
