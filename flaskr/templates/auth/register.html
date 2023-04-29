@@ -6,10 +6,39 @@
 
 {% block content %}
   <form method="post">
-    <label for="email">Email</label>
-    <input name="email" id="email" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Register">
+    {{ form_register.username.label }}
+    {{ form_register.username }}
+  
+  
+    {{ form_register.password.label }}
+    {{ form_register.password }}
+  
+
+    {{ form_register.password2.label }}
+    {{ form_register.password2 }}
+  
+
+    {{ form_register.sex.label }}
+    {{ form_register.sex }}
+
+
+    {{ form_register.email.label }}
+    {{ form_register.email }}
+  
+
+    {{ form_register.QQID.label }}
+    {{ form_register.QQID }}
+  
+
+    {{ form_register.WechatID.label }}
+    {{ form_register.WechatID }}
+  
+
+    {{ form_register.phoneNumber.label }}
+    {{ form_register.phoneNumber }}
+  
+    
+    {{ form_register.submit }}
+    
   </form>
 {% endblock %}

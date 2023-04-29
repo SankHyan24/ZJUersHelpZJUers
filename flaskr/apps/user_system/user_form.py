@@ -66,6 +66,11 @@ class RegistrationForm(Form):
         widget=widgets.TextInput(),
         validators=[validators.DataRequired(message="Sex can not be empty")]
     )
+    email = simple.StringField(
+        label='email',
+        widget=widgets.TextInput(),
+        validators=[validators.DataRequired(message="email can not be empty")]
+    )
     QQID = simple.StringField(
         label='QQID',
         widget=widgets.TextInput(),
