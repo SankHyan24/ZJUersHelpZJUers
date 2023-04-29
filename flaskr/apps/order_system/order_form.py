@@ -18,7 +18,7 @@ from wtforms import Form, validators, widgets, ValidationError
 class OrderInfoForm(Form):
     startTime = datetime.DateTimeField(
         label='startTime',
-        widget=widgets.DateTimeInput(),
+        widget=widgets.DateTimeLocalInput(),#as
         validators=[validators.DataRequired(message="StartTime can not be empty")]
     )
     dueTime = datetime.DateTimeField(
