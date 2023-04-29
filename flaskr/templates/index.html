@@ -20,8 +20,19 @@
   <header>
     {% block header %}{% endblock %}
   </header>
-  {% for order in g.order %}
-    <div class="single_order">{{ message }}</div>
+  {% for order in g.order["orderlist"] %}
+    <div class="single_order">
+      <p>
+        <span>startTime:{{ order[1][0] }}    ||    </span>
+        <span>dueTime:{{ order[1][1] }}</span>
+      </p>
+      <p>
+        <span>remark:{{ order[1][2] }}  ||  </span>
+        <span>location:{{ order[1][3] }}  ||  </span>
+        <span>moneyNum:{{ order[1][4] }}  ||  </span>
+        <span>chuanCoinsNum:{{ order[1][5] }}</span>
+      </p>
+    </div>
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
