@@ -7,22 +7,48 @@
 {% block content %}
 <div id = "back">
     <div id="left">
-        <span>user avatar</span><br>
-        <img id="ava" src = "../../static/2.jpg"></img>
-        <br><hr><br>
-        <button id="avabutton">修改个人信息</button><br>
-        <button id="avabutton">查看历史订单</button><br>
-        <button id="avabutton">还有什么来着</button><br>
+      <span>user avatar</span><br>
+      <img id="ava" src = "../../static/2.jpg"></img>
+      <br><hr><br>
+      <button id="avabutton" onclick="OnChangeUserInfo()">修改个人信息</button><br>
+      <button id="avabutton">查看历史订单</button><br>
+      <button id="avabutton">还有什么来着</button><br>
     </div>
-    <div id="left">
-        <h2>我的个人信息</h2>
-        <div><span>用户昵称: _ _ _</span></div>
-        <div><span>联系方式: _ _ _</span></div>
-        <div><span>性别: _ _ _</span></div>
-        <div><span>常驻校区: _ _ _</span></div>
+
+
+    <div id="left_show" style="display: inline-block">
+      <h2>我的个人信息</h2>
+      <div><span>用户昵称: {{ g.user["username"] }} </span></div>
+      <div><span>联系方式: _ _ _</span></div>
+      <div><span>性别: _ _ _</span></div>
+      <div><span>常驻校区: _ _ _</span></div>
     </div>
-</div>
-<div id="back" style="background-color: rgba(0,0,0,0);height: auto;min-height: 5%;">
+    
+    
+    <div id="left_change" style="display: none">
+      <h2>修改个人信息</h2>
+      <!-- <form method="post">
+        {{ form_register.username.label }}
+        {{ form_register.username }}      
+    
+        {{ form_register.sex.label }}
+        {{ form_register.sex }}      
+    
+        {{ form_register.QQID.label }}
+        {{ form_register.QQID }}      
+    
+        {{ form_register.WechatID.label }}
+        {{ form_register.WechatID }}      
+    
+        {{ form_register.phoneNumber.label }}
+        {{ form_register.phoneNumber }}      
+        
+        {{ form_register.submit }}        
+      </form> -->
+    </div>
+    
+  </div>
+  <div id="back" style="background-color: rgba(0,0,0,0);height: auto;min-height: 5%;">
     <br><hr>
     <span style="display: block;width:100%;font-size: small; text-align: center;">如有问题请联系: 123456789 @川</span>
 </div>
@@ -34,4 +60,20 @@
   <input id = "demo" type="submit" value="Log In">
 </form>
 -->
+
+<script>
+  function OnChangeUserInfo(){
+    left_show_display = document.getElementById("left_show").style.display;
+    if(left_show_display == "none"){
+      document.getElementById("left_show").style.display = "inline-block";
+      document.getElementById("left_change").style.display = "none";
+    } 
+    else{
+      document.getElementById("left_show").style.display = "none";
+      document.getElementById("left_change").style.display = "inline-block";
+    }
+    
+  }
+</script>
+
 {% endblock %}

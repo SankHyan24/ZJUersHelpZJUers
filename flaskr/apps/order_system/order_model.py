@@ -1,4 +1,5 @@
 from flaskr.db import get_db
+from flaskr.apps.order_system.order_form import *
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -107,3 +108,29 @@ def order_create(user_id:int, data:[]): # TODO test
 
         error = f"Order create failed."
         flash(error)
+
+def newID():
+    query = "SELECT OID FROM orderInfo ORDER BY startTime LIMIT 20"
+    db = get_db()
+    try:
+        db.execute(query)
+        db.connection.commit()
+        OID = db.fetchall()
+        return OID
+    except db.IntegrityError:
+        error = f"Get new orders failed."
+        flash(error)
+
+def getFormData(OID:int):
+    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum FROM orderInfo WHERE OID =" + str(OID)
+    db = get_db()
+    try:
+        db.execute(query)
+        db.connection.commit()
+        formdata = db.fetchone()
+        retForm = OrderInfoForm(formdata)
+        return OID
+    except db.IntegrityError:
+        error = f"Get form orders failed."
+        flash(error)
+    

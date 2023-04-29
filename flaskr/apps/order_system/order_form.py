@@ -1,6 +1,6 @@
 from wtforms.fields import simple, core
 from wtforms import Form, validators, widgets, ValidationError
-# Table userInfo:
+# Table orderInfo:
 #+---------------+-----------------------+------+-----+---------+-------+
 #| Field         | Type                  | Null | Key | Default | Extra |
 #+---------------+-----------------------+------+-----+---------+-------+
@@ -49,3 +49,4 @@ class OrderInfoForm(Form):
         label='Confirm',
         widget=widgets.SubmitInput()
     )
+
