@@ -109,9 +109,9 @@ def order_create(user_id:int, data): # TODO test
         error = f"Order create failed."
         flash(error)
 
-def return_oldest_ID():
+def return_latest_ID(pageNumber:int):
     
-    query = "SELECT OID FROM orderInfo ORDER BY startTime DESC LIMIT 20"
+    query = "SELECT OID FROM orderInfo ORDER BY startTime DESC LIMIT 20 OFFSET " + str(pageNumber * 20)
     db = get_db()
     try:
         db.execute(query)
