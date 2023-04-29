@@ -123,7 +123,7 @@ def return_latest_ID(pageNumber:int):
         flash(error)
 
 def getFormData(OID:int):
-    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum FROM orderInfo WHERE OID =" + str(OID[0])
+    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum FROM orderInfo WHERE OID = " + str(OID)
     print(query)
     db = get_db()
     try:

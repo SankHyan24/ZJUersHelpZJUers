@@ -55,9 +55,14 @@ def index():
 @bp.route("/search_order/<token>",methods=["GET"])
 def search_order(token):
     search_result_form=get_search_result(token)
-    print("order_rout: search_result\n")
-    print(search_result_form)
-    return render_template('order/search_order.html',search_result_form=search_result_form)
+    # print(search_result_form)
+    g.search = {}
+    searchlist=[]
+    for order in search_result_form:
+        searchlist.append((order[0],getFormData(order[0])))
+    print("searchlist",searchlist)
+    g.search["searchlist"] = searchlist
+    return render_template('search.html',search_result_form=search_result_form)
 
 
     
