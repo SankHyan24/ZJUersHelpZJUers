@@ -4,6 +4,7 @@
 <nav>
   <h1><a href="{{ url_for('index') }}">Zjuers Help Zjuers</a></h1>
   <input id="search_menu"/>
+  <input id="search_button" type="button" value="search"/>
   <ul>
     {% if g.user %}
       <li><span>Hello! {{ g.user["username"] }}</span>
@@ -20,8 +21,29 @@
   <header>
     {% block header %}{% endblock %}
   </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
+  {% for order in g.order["orderlist"] %}
+    <div class="single_order">
+      <p>
+        <span>startTime:{{ order[1][0] }}    ||    </span>
+        <span>dueTime:{{ order[1][1] }}</span>
+      </p>
+      <p>
+        <span>remark:{{ order[1][2] }}  ||  </span>
+        <span>location:{{ order[1][3] }}  ||  </span>
+        <span>moneyNum:{{ order[1][4] }}  ||  </span>
+        <span>chuanCoinsNum:{{ order[1][5] }}</span>
+      </p>
+    </div>
   {% endfor %}
   {% block content %}{% endblock %}
+  
+  <script>  
+    const search_menu = document.querySelector('#search_menu');
+    const search_button = document.querySelector('#search_button');
+
+    search_button.addEventListener('click', () => {
+        console.log(search_menu.value);
+        window.location.href = '/search_order/' + search_menu.value;
+    });
+  </script>
 </section>
