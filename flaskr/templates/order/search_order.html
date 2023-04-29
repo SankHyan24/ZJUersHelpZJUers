@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Create Order{% endblock %}</h1>
+  <h1>{% block title %}Search Result{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 
-    {% for order in search_result_form %}
+    {% for order in g.search["searchlist"] %}
     <div class="single_order">
     <p>
         <span>startTime:{{ order[1][0] }}    ||    </span>

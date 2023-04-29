@@ -1,6 +1,8 @@
 <!doctype html>
 <title>Zjuers Help Zjuers</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
 <nav>
   <h1><a href="{{ url_for('index') }}">Zjuers Help Zjuers</a></h1>
   <input id="search_menu"/>
@@ -16,11 +18,25 @@
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
   </ul>
+
+  <script>  
+    const search_menu = document.querySelector('#search_menu');
+    const search_button = document.querySelector('#search_button');
+
+    search_button.addEventListener('click', () => {
+        console.log(search_menu.value);
+        window.location.href = '/search_order/' + search_menu.value;
+    });
+  </script>
 </nav>
+
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}
   </header>
+
+  {% comment %} 每一个订单 {% endcomment %}
   {% for order in g.order["orderlist"] %}
     <div class="single_order">
       <p>
@@ -35,6 +51,8 @@
       </p>
     </div>
   {% endfor %}
+  
+  {% comment %} 页面编号 {% endcomment %}
   <div>
     <button id="page" onclick = "Click(1)">1</button>
     <button id="page" onclick = "Click(2)">2</button>
@@ -48,16 +66,10 @@
     <button id="page" onclick = "Click(10)">10</button>
     
   </div>
+
   {% block content %}{% endblock %}
   
-  <script>  
-    const search_menu = document.querySelector('#search_menu');
-    const search_button = document.querySelector('#search_button');
-
-    search_button.addEventListener('click', () => {
-        console.log(search_menu.value);
-        window.location.href = '/search_order/' + search_menu.value;
-    });
+  <script>
     function Click(x){
       window.location.href = '/' + x;
     }
