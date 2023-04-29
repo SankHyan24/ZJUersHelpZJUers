@@ -37,6 +37,20 @@ def index(pageNumber):
         g.order["pageNumber"] = pageNumber
         return render_template('index.html')
 
+@bp.route("/",methods=["GET"])
+def index():
+    if request.method == 'GET':
+        oldOID = return_latest_ID(1)
+        g.order = {}
+        orderlist=[]
+        for OID in oldOID:
+            orderlist.append((OID,getFormData(OID)))
+        g.order["orderlist"] = orderlist
+        g.order["oldID"] = oldOID
+        g.order["pageNumber"] = 1
+        return render_template('index.html')
+
+
 
 @bp.route("/search_order/<token>",methods=["GET"])
 def search_order(token):
