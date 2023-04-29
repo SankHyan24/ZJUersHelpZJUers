@@ -23,10 +23,8 @@ def register():
 @bp.route("/userinfo", methods=("GET", "POST"))
 def userinfo():
     #return render_template("auth/userinfo.html")
-    print(33)
     if request.method == 'GET':
         form_modify = InfoModifyForm()
-        print(1)
         return render_template("auth/userinfo.html",form_modify=form_modify)
     
     if request.method == 'POST':

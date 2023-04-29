@@ -32,9 +32,9 @@ def create_app(test_config=None):
         return 'Hello, World!'
     
     # main page
-    @app.route('/')
-    def index():
-        return render_template('index.html')    
+    # @app.route('/')
+    # def index():
+    #     return render_template('index.html')    
    
 
     
@@ -42,10 +42,12 @@ def create_app(test_config=None):
     from flaskr.apps import auth
     from flaskr.apps import blog
     from flaskr.apps.user_system.user_route import bp as user_bp
+    from flaskr.apps.order_system.order_route import bp as order_bp
     
     app.register_blueprint(auth.bp)
     app.register_blueprint(blog.bp)
     app.register_blueprint(user_bp)
+    app.register_blueprint(order_bp)
     
     
     app.add_url_rule("/", endpoint="index")

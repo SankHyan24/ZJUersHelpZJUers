@@ -1,4 +1,4 @@
-from wtforms.fields import simple, core
+from wtforms.fields import simple, core, datetime, IntegerField
 from wtforms import Form, validators, widgets, ValidationError
 # Table orderInfo:
 #+---------------+-----------------------+------+-----+---------+-------+
@@ -16,12 +16,12 @@ from wtforms import Form, validators, widgets, ValidationError
 #| ordereeID     | int unsigned          | YES  | MUL | NULL    |       |
 #+---------------+-----------------------+------+-----+---------+-------+
 class OrderInfoForm(Form):
-    startTime = simple.DateTimeField(
+    startTime = datetime.DateTimeField(
         label='startTime',
         widget=widgets.DateTimeInput(),
         validators=[validators.DataRequired(message="StartTime can not be empty")]
     )
-    dueTime = simple.DateTimeField(
+    dueTime = datetime.DateTimeField(
         label='dueTime',
         widget=widgets.DateTimeInput(),
         validators=[validators.DataRequired(message="DueTime can not be empty")]
@@ -35,12 +35,12 @@ class OrderInfoForm(Form):
         widget=widgets.TextInput(),
         validators=[validators.DataRequired(message="Location can not be empty")]
     )
-    moneyNum = simple.IntegerField(
+    moneyNum = IntegerField(
         label='moneyNum',
         widget=widgets.TextInput(),
         validators=[validators.DataRequired(message="MoneyNum can not be empty")]
     )
-    chuanCoinsNum = simple.IntegerField(
+    chuanCoinsNum = IntegerField(
         label='chuanCoinsNum',
         widget=widgets.TextInput(),
         validators=[validators.DataRequired(message="ChuanCoinsNum can not be empty")]
