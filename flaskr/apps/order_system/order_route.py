@@ -19,7 +19,7 @@ def create_order():
         else:
             print(form_create_order.errors, "Error Message")
 
-            return render_template("order/create_order.html",info_form=form_create_order) # TODO: render html template
+            return render_template("order/create_order.html",form_create_order=form_create_order) # TODO: render html template
 
 @bp.route("/",methods=["GET","POST"])
 def index():
