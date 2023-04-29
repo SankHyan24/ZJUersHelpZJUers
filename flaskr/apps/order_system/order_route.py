@@ -24,31 +24,18 @@ def create_order():
 
             return render_template("order/create_order.html",form_create_order=form_create_order) # TODO: render html template
 
-@bp.route("/",methods=["GET","POST"])
-def index():
+@bp.route("/<int:pageNumber>",methods=["GET"])
+def index(pageNumber):
     if request.method == 'GET':
-        oldOID = return_latest_ID(0)
+        oldOID = return_latest_ID(pageNumber)
         g.order = {}
         orderlist=[]
         for OID in oldOID:
             orderlist.append((OID,getFormData(OID)))
         g.order["orderlist"] = orderlist
         g.order["oldID"] = oldOID
-        g.order["count"] = 1
+        g.order["pageNumber"] = pageNumber
         return render_template('index.html')
-    
-    if request.method == 'POST':
-        oldOID = return_latest_ID(g.order['count'])
-        orderlist = []
-        for OID in oldOID:
-            orderlist.append((OID,getFormData(OID)))
-        g.order["orderlist"] = orderlist
-        g.order["oldID"] = oldOID
-        g.order["count"] = g.order['count'] + 1
-        return render_template("index.html")
-        
-# [((7, datetime.datetime(2023, 4, 30, 22, 34), datetime.datetime(2023, 4, 20, 22, 34), 'scscs', '1', Decimal('1.00'), 1, None, 33, None), 
-#   (datetime.datetime(2023, 4, 30, 22, 34), datetime.datetime(2023, 4, 20, 22, 34), 'scscs', '1', Decimal('1.00'), 1))]
 
 @bp.route("/search_order/<token>",methods=["GET"])
 def search_order(token):
