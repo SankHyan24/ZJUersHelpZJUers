@@ -17,17 +17,18 @@ from wtforms import Form, validators, widgets, ValidationError
 #| ordereeID     | int unsigned          | YES  | MUL | NULL    |       |
 #+---------------+-----------------------+------+-----+---------+-------+
 class OrderInfoForm(Form):
-    startTime = datetime.DateTimeField(
+    startTime = datetime.DateTimeLocalField(
         label='startTime',
         # date time picker
         widget = widgets.DateTimeLocalInput(),
-        validators=[validators.DataRequired(message="StartTime can not be empty")],
-        format='%Y-%m-%d %H:%M:%S'
+        # validators=[validators.DataRequired(message="StartTime can not be empty")],
+        format='%Y-%m-%dT%H:%M'
     )
-    dueTime = datetime.DateTimeField(
+    dueTime = datetime.DateTimeLocalField(
         label='dueTime',
         widget=widgets.DateTimeLocalInput(),
-        validators=[validators.DataRequired(message="DueTime can not be empty")]
+        # validators=[validators.DataRequired(message="DueTime can not be empty")]
+        format='%Y-%m-%dT%H:%M'
     )
     remark = simple.StringField(
         label='remark',

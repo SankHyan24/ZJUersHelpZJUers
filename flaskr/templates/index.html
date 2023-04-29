@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
   <h1><a href="{{ url_for('index') }}">Zjuers Help Zjuers</a></h1>
+  <input id="search_menu"/>
   <ul>
     {% if g.user %}
       <li><span>Hello! {{ g.user["username"] }}</span>

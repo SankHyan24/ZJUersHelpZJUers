@@ -109,8 +109,9 @@ def order_create(user_id:int, data): # TODO test
         error = f"Order create failed."
         flash(error)
 
-def return_newest_ID():
-    query = "SELECT OID FROM orderInfo ORDER BY startTime LIMIT 20"
+def return_oldest_ID():
+    
+    query = "SELECT OID FROM orderInfo ORDER BY startTime DESC LIMIT 20"
     db = get_db()
     try:
         db.execute(query)
@@ -122,14 +123,14 @@ def return_newest_ID():
         flash(error)
 
 def getFormData(OID:int):
-    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum FROM orderInfo WHERE OID =" + str(OID)
+    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum FROM orderInfo WHERE OID =" + str(OID[0])
+    print(query)
     db = get_db()
     try:
         db.execute(query)
         db.connection.commit()
         formdata = db.fetchone()
-        retForm = OrderInfoForm(formdata)
-        return OID
+        return formdata
     except db.IntegrityError:
         error = f"Get form orders failed."
         flash(error)
