@@ -1,5 +1,6 @@
 from wtforms.fields import simple, core, datetime, IntegerField
 from wtforms import Form, validators, widgets, ValidationError
+
 # Table orderInfo:
 #+---------------+-----------------------+------+-----+---------+-------+
 #| Field         | Type                  | Null | Key | Default | Extra |
@@ -18,12 +19,14 @@ from wtforms import Form, validators, widgets, ValidationError
 class OrderInfoForm(Form):
     startTime = datetime.DateTimeField(
         label='startTime',
-        widget=widgets.DateTimeInput(),
-        validators=[validators.DataRequired(message="StartTime can not be empty")]
+        # date time picker
+        widget = widgets.DateTimeLocalInput(),
+        validators=[validators.DataRequired(message="StartTime can not be empty")],
+        format='%Y-%m-%d %H:%M:%S'
     )
     dueTime = datetime.DateTimeField(
         label='dueTime',
-        widget=widgets.DateTimeInput(),
+        widget=widgets.DateTimeLocalInput(),
         validators=[validators.DataRequired(message="DueTime can not be empty")]
     )
     remark = simple.StringField(
