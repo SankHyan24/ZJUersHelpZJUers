@@ -35,6 +35,19 @@
       </p>
     </div>
   {% endfor %}
+  <div>
+    <button id="page" onclick = "Click(1)">1</button>
+    <button id="page" onclick = "Click(2)">2</button>
+    <button id="page" onclick = "Click(3)">3</button>
+    <button id="page" onclick = "Click(4)">4</button>
+    <button id="page" onclick = "Click(5)">5</button>
+    <button id="page" onclick = "Click(6)">6</button>
+    <button id="page" onclick = "Click(7)">7</button>
+    <button id="page" onclick = "Click(8)">8</button>
+    <button id="page" onclick = "Click(9)">9</button>
+    <button id="page" onclick = "Click(10)">10</button>
+    
+  </div>
   {% block content %}{% endblock %}
   
   <script>  
@@ -45,5 +58,8 @@
         console.log(search_menu.value);
         window.location.href = '/search_order/' + search_menu.value;
     });
+    function Click(x){
+      window.location.href = '/' + x;
+    }
   </script>
 </section>
