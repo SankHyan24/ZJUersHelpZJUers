@@ -34,3 +34,7 @@ def register():
         else:
             print(form_register.errors, "Error Message")
             return render_template('auth/register.html',form_register=form_register) # TODO
+        
+@bp.route("/userinfo", methods=("GET", "POST"))
+def userinfo():
+    return render_template("auth/userinfo.html")
