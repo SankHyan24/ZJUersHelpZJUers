@@ -32,9 +32,9 @@ def create_app(test_config=None):
         return 'Hello, World!'
     
     # main page
-    # @app.route('/')
-    # def index():
-    #     return render_template('index.html')    
+    @app.route('/')
+    def index():
+        return render_template('index.html')    
    
 
     

@@ -5,21 +5,6 @@ from flask import render_template, request, url_for, redirect, session
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
-# @bp.route("/info/modify",method=["GET","POST"])
-# def info_modify():
-#     if request.method == 'GET':
-#         form_modify = InfoModifyForm()
-#         return render_template('',form_modify=form_modify)
-#     else:
-#         form_modify = InfoModifyForm(formdata=request.form)
-#         if form_modify.validate():
-#             infoModify(session.get('user_uid'), form_modify.data)
-#             return redirect(url_for('info'))
-#         else:
-#             print(form_modify.errors, "Error Message")
-
-#             return render_template("info.html",info_form=form_modify)
-        
 @bp.route("/register",methods=["GET","POST"])
 def register():
     if request.method == 'GET':
@@ -38,15 +23,17 @@ def register():
 @bp.route("/userinfo", methods=("GET", "POST"))
 def userinfo():
     #return render_template("auth/userinfo.html")
+    print(33)
     if request.method == 'GET':
         form_modify = InfoModifyForm()
+        print(1)
         return render_template("auth/userinfo.html",form_modify=form_modify)
     
     if request.method == 'POST':
         form_modify = InfoModifyForm(formdata=request.form)
         if form_modify.validate():
-            infoModify(g.user['user_uid'], form_modify.data)
-            return redirect("auth/userinfo.html")
+            infoModify(session['user_uid'], form_modify.data)
+            return redirect("user/userinfo.html")
         else:
             print(form_modify.errors, "Error Message")
-            return render_template("auth/userinfo.html",form_modify=form_modify)
+            return render_template("user/userinfo.html",form_modify=form_modify)

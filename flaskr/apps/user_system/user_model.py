@@ -29,11 +29,12 @@ from flask import (
 # | UID         | int unsigned | NO   | MUL | NULL    |                |
 # +-------------+--------------+------+-----+---------+----------------+
 
-def infoModify(user_id:int, data:[]):
+def infoModify(user_id:int, data):
     db = get_db()
+    user_id = str(user_id)
 
-    if data['userName']:
-        update = "update userInfo SET userName = \'" + str(data['userName']) + "\' where UID = \'" + user_id + '\''
+    if data['username']:
+        update = "update userInfo SET userName = \'" + str(data['username']) + "\' where UID = \'" + user_id + '\''
         db.execute(update)
         db.connection.commit()
     if data['sex']:
@@ -54,7 +55,7 @@ def infoModify(user_id:int, data:[]):
         db.connection.commit()
 
 
-def info_register(data:[]):
+def info_register(data):
     db = get_db()
     email = data['email']
     pwd = generate_password_hash(data["password"])
