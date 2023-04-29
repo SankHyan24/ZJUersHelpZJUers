@@ -13,7 +13,7 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 #     else:
 #         form_modify = InfoModifyForm(formdata=request.form)
 #         if form_modify.validate():
-#             infoModify(session['user_id'], form_modify.data)
+#             infoModify(session.get('user_uid'), form_modify.data)
 #             return redirect(url_for('info'))
 #         else:
 #             print(form_modify.errors, "Error Message")
