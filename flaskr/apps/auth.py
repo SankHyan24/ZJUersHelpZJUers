@@ -55,15 +55,15 @@ def load_logged_in_user():
             
         }
         g.userInfo = {
-            "UserInfoID,":sc_UserInfoID,
-            "avatarUrl,":sc_avatarUrl,
-            "userName,":sc_userName,
-            "sex,":sc_sex,
-            "QQID,":sc_QQID,
-            "WechatID,":sc_WechatID,
-            "phoneNumber,":sc_phoneNumber,
-            "chuanCoins,":sc_chuanCoins,
-            "review,":sc_review,
+            "UserInfoID":sc_UserInfoID,
+            "avatarUrl":sc_avatarUrl,
+            "userName":sc_userName,
+            "sex":sc_sex,
+            "QQID":sc_QQID,
+            "WechatID":sc_WechatID,
+            "phoneNumber":sc_phoneNumber,
+            "chuanCoins":sc_chuanCoins,
+            "review":sc_review,
             "UID":sc_UID
         }
         

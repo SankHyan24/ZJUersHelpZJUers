@@ -18,10 +18,13 @@
 
     <div id="left_show" style="display: inline-block">
       <h2>我的个人信息</h2>
-      <div><span>用户昵称: {{ g.user["username"] }} </span></div>
-      <div><span>联系方式: _ _ _</span></div>
-      <div><span>性别: _ _ _</span></div>
-      <div><span>常驻校区: _ _ _</span></div>
+      <div><span>用户ID:  {{ g.userInfo["UID"] }} </span></div>
+      <div><span>用户名:  {{ g.userInfo["userName"] }} </span></div>
+      <div><span>性别:    {{ g.userInfo["sex"] }}</span></div>
+      <div><span>QQ:      {{ g.userInfo["QQID"] }}</span></div>
+      <div><span>微信:    {{ g.userInfo["WechatID"] }}</span></div>
+      <div><span>电话:    {{ g.userInfo["phoneNumber"] }}</span></div>
+      <div><span>川币:    {{ g.userInfo["chuanCoins"] }}</span></div>
     </div>
     
     
