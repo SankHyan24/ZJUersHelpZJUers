@@ -30,16 +30,43 @@ def load_logged_in_user():
 
     if user_uid is None:
         g.user = None
+        g.userInfo = None
     else:
         db=get_db()
         db.execute("SELECT * FROM user WHERE UID = \"{}\"".format(user_uid))
         uid, password_hashed, email  = db.fetchone()
+        db.execute("SELECT * FROM userInfo WHERE UID = \"{}\"".format(user_uid))
+        
+        sc_UserInfoID,\
+        sc_avatarUrl,\
+        sc_userName,\
+        sc_sex,\
+        sc_QQID,\
+        sc_WechatID,\
+        sc_phoneNumber,\
+        sc_chuanCoins,\
+        sc_review,\
+        sc_UID = db.fetchone()
         
         g.user = {
             "uid": uid,
             "email": email,
             "password_hashed": password_hashed
+            
         }
+        g.userInfo = {
+            "UserInfoID,":sc_UserInfoID,
+            "avatarUrl,":sc_avatarUrl,
+            "userName,":sc_userName,
+            "sex,":sc_sex,
+            "QQID,":sc_QQID,
+            "WechatID,":sc_WechatID,
+            "phoneNumber,":sc_phoneNumber,
+            "chuanCoins,":sc_chuanCoins,
+            "review,":sc_review,
+            "UID":sc_UID
+        }
+        
         g.user["username"] = get_user_name(g.user["uid"])
        
 @bp.route("/userinfo", methods=("GET", "POST"))
@@ -102,7 +129,6 @@ def login():
             session.clear()
             session["user_uid"] = user_UID
             return redirect(url_for("index"))
-
         flash(error)
     return render_template("auth/login.html")
 
