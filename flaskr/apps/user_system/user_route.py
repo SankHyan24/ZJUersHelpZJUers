@@ -39,8 +39,8 @@ def register():
 def userinfo():
     #return render_template("auth/userinfo.html")
     if request.method == 'GET':
-        form_register = RegistrationForm()
-        return render_template("auth/userinfo.html",form_register=form_register)
+        form_modify = InfoModifyForm()
+        return render_template("auth/userinfo.html",form_modify=form_modify)
     
     if request.method == 'POST':
         form_modify = InfoModifyForm(formdata=request.form)
