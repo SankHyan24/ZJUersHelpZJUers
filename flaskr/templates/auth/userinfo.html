@@ -10,7 +10,7 @@
       <span>user avatar</span><br>
       <img id="ava" src = "../../static/2.jpg"></img>
       <br><hr><br>
-      <button id="avabutton" onclick="OnChangeUserInfo()">修改个人信息</button><br>
+      <button id="avabutton" onclick="OnChangeUserInfo(this)">修改个人信息</button><br>
       <button id="avabutton">查看历史订单</button><br>
       <button id="avabutton">还有什么来着</button><br>
     </div>
@@ -65,15 +65,17 @@
 -->
 
 <script>
-  function OnChangeUserInfo(){
+  function OnChangeUserInfo(obj){
     left_show_display = document.getElementById("left_show").style.display;
     if(left_show_display == "none"){
       document.getElementById("left_show").style.display = "inline-block";
       document.getElementById("left_change").style.display = "none";
+      obj.innerHTML = "修改个人信息";
     } 
     else{
       document.getElementById("left_show").style.display = "none";
       document.getElementById("left_change").style.display = "inline-block";
+      obj.innerHTML = "显示个人信息";
     }
     
   }
