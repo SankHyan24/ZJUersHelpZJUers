@@ -31,7 +31,7 @@ def index(pageNumber):
         g.order = {}
         orderlist=[]
         for OID in oldOID:
-            orderlist.append((OID,getFormData(OID)))
+            orderlist.append((OID,getFormData(OID[0])))
         g.order["orderlist"] = orderlist
         g.order["oldID"] = oldOID
         g.order["pageNumber"] = pageNumber
