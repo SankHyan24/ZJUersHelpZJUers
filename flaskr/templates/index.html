@@ -4,6 +4,7 @@
 <nav>
   <h1><a href="{{ url_for('index') }}">Zjuers Help Zjuers</a></h1>
   <input id="search_menu"/>
+  <input id="search_button" type="button" value="search"/>
   <ul>
     {% if g.user %}
       <li><span>Hello! {{ g.user["username"] }}</span>
@@ -35,4 +36,14 @@
     </div>
   {% endfor %}
   {% block content %}{% endblock %}
+  
+  <script>  
+    const search_menu = document.querySelector('#search_menu');
+    const search_button = document.querySelector('#search_button');
+
+    search_button.addEventListener('click', () => {
+        console.log(search_menu.value);
+        window.location.href = '/search_order/' + search_menu.value;
+    });
+  </script>
 </section>
