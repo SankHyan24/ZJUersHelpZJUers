@@ -29,59 +29,81 @@ from flask import (
 # | UID         | int unsigned | NO   | MUL | NULL    |                |
 # +-------------+--------------+------+-----+---------+----------------+
 
-def infoModify(user_id:int, data:[]):
+# def infoModify(user_id:int, data:[]):
+#     db = get_db()
+
+#     if data['userName']:
+#         update = "update userInfo SET userName = \'" + str(data['userName']) + "\' where UID = \'" + user_id + '\''
+#         db.execute(update)
+#         db.connection.commit()
+#     if data['sex']:
+#         update = "update userInfo SET sex = \'" + str(data['sex']) + "\' where UID = \'" + user_id + '\''
+#         db.execute(update)
+#         db.connection.commit()
+#     if data['QQID']:
+#         update = "update userInfo SET QQID = \'" + str(data['QQID']) + "\' where UID = \'" + user_id + '\''
+#         db.execute(update)
+#         db.connection.commit()
+#     if data['WechatID']:
+#         update = "update userInfo SET WechatID = \'" + str(data['WechatID']) + "\' where UID = \'" + user_id + '\''
+#         db.execute(update)
+#         db.connection.commit()
+#     if data['phoneNumber']:
+#         update = "update userInfo SET phoneNumber = \'" + str(data['phoneNumber']) + "\' where UID = \'" + user_id + '\''
+#         db.execute(update)
+#         db.connection.commit()
+
+
+# def info_register(data:[]):
+#     db = get_db()
+#     email = data['email']
+#     pwd = generate_password_hash(data["password"])
+#     query = "insert into user (email, password) values (\"{}\",\"{}\")".format(email,pwd)
+#     query2 = "select * from user where email=\"{}\"".format(email)
+#     try:
+#         db.execute(query)
+#         db.connection.commit()
+#     except db.IntegrityError:
+#         # The email was already taken, which caused the
+#         # commit to fail. Show a validation error.
+#         error = f"EMAIL: {email} is already registered."
+#         flash(error)
+
+#     db.execute(query2)
+#     result=db.fetchone()
+
+#     uid, pwd, email = result
+#     query3 = "insert into userInfo VALUES (null, null, \"{}\",\"{}\",\"{}\",\"{}\")".format\
+#         (data['username'],data['sex'],data['QQID'],data['WechatID'],data['phoneNumber'])
+    
+#     try:
+#         db.execute(query3)
+#         db.connection.commit()
+#     except db.IntegrityError:
+#         # The email was already taken, which caused the
+#         # commit to fail. Show a validation error.
+#         error = f"EMAIL: {email} is already registered."
+#         flash(error)
+   
+
+def order_create(user_id:int, data:[]):
     db = get_db()
-
-    if data['userName']:
-        update = "update userInfo SET userName = \'" + str(data['userName']) + "\' where UID = \'" + user_id + '\''
-        db.execute(update)
-        db.connection.commit()
-    if data['sex']:
-        update = "update userInfo SET sex = \'" + str(data['sex']) + "\' where UID = \'" + user_id + '\''
-        db.execute(update)
-        db.connection.commit()
-    if data['QQID']:
-        update = "update userInfo SET QQID = \'" + str(data['QQID']) + "\' where UID = \'" + user_id + '\''
-        db.execute(update)
-        db.connection.commit()
-    if data['WechatID']:
-        update = "update userInfo SET WechatID = \'" + str(data['WechatID']) + "\' where UID = \'" + user_id + '\''
-        db.execute(update)
-        db.connection.commit()
-    if data['phoneNumber']:
-        update = "update userInfo SET phoneNumber = \'" + str(data['phoneNumber']) + "\' where UID = \'" + user_id + '\''
-        db.execute(update)
-        db.connection.commit()
-
-
-def info_register(data:[]):
-    db = get_db()
-    email = data['email']
-    pwd = generate_password_hash(data["password"])
-    query = "insert into user (email, password) values (\"{}\",\"{}\")".format(email,pwd)
-    query2 = "select * from user where email=\"{}\"".format(email)
+    startTime = data['startTime']
+    dueTime = data['dueTime']
+    remark = data['remark']
+    location = data['location']
+    moneyNum = data['moneyNum']
+    chuanCoinsNum = data['chuanCoinsNum']
+    
+    
+    query = "insert into userInfo VALUES (null, \"{}\",\"{}\",\"{}\",\"{}\")".format\
+        (startTime,dueTime,remark,location,moneyNum,chuanCoinsNum, user_id)
+    
+    
     try:
         db.execute(query)
         db.connection.commit()
     except db.IntegrityError:
-        # The email was already taken, which caused the
-        # commit to fail. Show a validation error.
-        error = f"EMAIL: {email} is already registered."
-        flash(error)
 
-    db.execute(query2)
-    result=db.fetchone()
-
-    uid, pwd, email = result
-    query3 = "insert into userInfo VALUES (null, null, \"{}\",\"{}\",\"{}\",\"{}\")".format\
-        (data['username'],data['sex'],data['QQID'],data['WechatID'],data['phoneNumber'])
-    
-    try:
-        db.execute(query3)
-        db.connection.commit()
-    except db.IntegrityError:
-        # The email was already taken, which caused the
-        # commit to fail. Show a validation error.
-        error = f"EMAIL: {email} is already registered."
+        error = f"Order create failed."
         flash(error)
-   
