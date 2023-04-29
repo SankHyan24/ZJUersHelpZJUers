@@ -23,10 +23,20 @@ def create_order():
 
 @bp.route("/",methods=["GET","POST"])
 def index():
-    newOID = newID()
+    newOID = return_newest_ID()
     for OID in newOID:
         g.order[OID] = getFormData(OID)
         g.newID = newOID
     return render_template('index.html')
-    
+
+
+
+
+
+@bp.route("/search_order/<int:token>",methods=["GET"])
+def search_order(token):
+    search_result_form=get_search_result(token)
+    return render_template('search.html',search_result_form=search_result_form)
+
+
     

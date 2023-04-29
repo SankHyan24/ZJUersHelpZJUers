@@ -109,7 +109,7 @@ def order_create(user_id:int, data:[]): # TODO test
         error = f"Order create failed."
         flash(error)
 
-def newID():
+def return_newest_ID():
     query = "SELECT OID FROM orderInfo ORDER BY startTime LIMIT 20"
     db = get_db()
     try:
