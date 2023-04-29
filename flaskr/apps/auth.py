@@ -40,7 +40,7 @@ def load_logged_in_user():
             "email": email,
             "password_hashed": password_hashed
         }
-        g.user["username"] = get_user_name(g.user["uid"])
+        g.user["username"] = get_user_name(g.user["uid"])[0]
        
 @bp.route("/userinfo", methods=("GET", "POST"))
 def userinfo():
