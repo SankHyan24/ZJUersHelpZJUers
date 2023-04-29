@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {{ form_create_order.startTime.label }}
+    {{ form_create_order.startTime }}
+
+    {{ form_create_order.dueTime.label }}
+    {{ form_create_order.dueTime }}
+
+    {{ form_create_order.remark.label }}
+    {{ form_create_order.remark }}
+
+    {{ form_create_order.location.label }}
+    {{ form_create_order.location }}
+
+    {{ form_create_order.moneyNum.label }}
+    {{ form_create_order.moneyNum }}
+
+    {{ form_create_order.chuanCoinsNum.label }}
+    {{ form_create_order.chuanCoinsNum }}
+
+    {{ form_create_order.submit }}
+    
+  </form>
+{% endblock %}
