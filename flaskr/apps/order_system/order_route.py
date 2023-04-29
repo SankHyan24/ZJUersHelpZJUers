@@ -26,13 +26,13 @@ def create_order():
 
 @bp.route("/",methods=["GET","POST"])
 def index():
-    newOID = return_newest_ID()
+    oldOID = return_oldest_ID()
     g.order = {}
     orderlist=[]
-    for OID in newOID:
+    for OID in oldOID:
         orderlist.append((OID,getFormData(OID)))
     g.order["orderlist"] = orderlist
-    g.order["newID"] = newOID
+    g.order["oldID"] = oldOID
     return render_template('index.html')
 
 @bp.route("/search_order/<token>",methods=["GET"])
