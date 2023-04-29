@@ -73,8 +73,8 @@ def info_register(data:[]):
     result=db.fetchone()
 
     uid, pwd, email = result
-    query3 = "insert into userInfo VALUES (null, null, \"{}\",\"{}\",\"{}\",\"{}\")".format\
-        (data['username'],data['sex'],data['QQID'],data['WechatID'],data['phoneNumber'])
+    query3 = "insert into userInfo (userName, sex, QQID, WechatID, phoneNumber, UID) VALUES (\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\")".format\
+        (data['username'],data['sex'],data['QQID'],data['WechatID'],data['phoneNumber'], uid)
     
     try:
         db.execute(query3)
