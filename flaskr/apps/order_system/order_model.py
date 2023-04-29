@@ -86,7 +86,7 @@ from flask import (
 #         flash(error)
    
 
-def order_create(user_id:int, data:[]):
+def order_create(user_id:int, data:[]): # TODO test
     db = get_db()
     startTime = data['startTime']
     dueTime = data['dueTime']
@@ -96,8 +96,8 @@ def order_create(user_id:int, data:[]):
     chuanCoinsNum = data['chuanCoinsNum']
     
     
-    query = "insert into userInfo VALUES (null, \"{}\",\"{}\",\"{}\",\"{}\")".format\
-        (startTime,dueTime,remark,location,moneyNum,chuanCoinsNum, user_id)
+    query = "insert into orderInfo (startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID)  VALUES (\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\")".format\
+        (startTime,dueTime,remark,location,moneyNum,chuanCoinsNum,user_id)
     
     
     try:
