@@ -37,4 +37,16 @@ def register():
         
 @bp.route("/userinfo", methods=("GET", "POST"))
 def userinfo():
-    return render_template("auth/userinfo.html")
+    #return render_template("auth/userinfo.html")
+    if request.method == 'GET':
+        form_register = RegistrationForm()
+        return render_template("auth/userinfo.html",form_register=form_register)
+    
+    if request.method == 'POST':
+        form_modify = InfoModifyForm(formdata=request.form)
+        if form_modify.validate():
+            infoModify(g.user['user_uid'], form_modify.data)
+            return redirect("auth/userinfo.html")
+        else:
+            print(form_modify.errors, "Error Message")
+            return render_template("auth/userinfo.html",form_modify=form_modify)
