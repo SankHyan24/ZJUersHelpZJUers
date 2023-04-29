@@ -87,7 +87,7 @@ from flask import (
 #         flash(error)
    
 
-def order_create(user_id:int, data:[]): # TODO test
+def order_create(user_id:int, data): # TODO test
     db = get_db()
     startTime = data['startTime']
     dueTime = data['dueTime']

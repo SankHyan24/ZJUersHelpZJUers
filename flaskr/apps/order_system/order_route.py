@@ -10,16 +10,16 @@ bp = Blueprint('order', __name__)
 def create_order():
     if request.method == 'GET':
         form_create_order = OrderInfoForm()
-        return render_template('',form_create_order=form_create_order)
+        return render_template('order/create_order.html',form_create_order=form_create_order)
     else:
         form_create_order = OrderInfoForm(formdata=request.form)
         if form_create_order.validate():
             order_create(session['user_id'], form_create_order.data)
-            return redirect(url_for('')) # TODO: redirect url
+            return redirect(url_for('/')) # TODO: redirect url
         else:
             print(form_create_order.errors, "Error Message")
 
-            return render_template("",info_form=form_create_order) # TODO: render html template
+            return render_template("order/create_order.html",info_form=form_create_order) # TODO: render html template
 
 @bp.route("/",methods=["GET","POST"])
 def index():
