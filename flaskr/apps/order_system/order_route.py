@@ -38,17 +38,13 @@ def index(pageNumber):
         return render_template('index.html')
 
 @bp.route("/",methods=["GET"])
-def index():
-    if request.method == 'GET':
-        oldOID = return_latest_ID(1)
-        g.order = {}
-        orderlist=[]
-        for OID in oldOID:
-            orderlist.append((OID,getFormData(OID)))
-        g.order["orderlist"] = orderlist
-        g.order["oldID"] = oldOID
-        g.order["pageNumber"] = 1
-        return render_template('index.html')
+def null_index():
+    user_uid = session.get("user_uid")
+    if user_uid is None:
+        return redirect(url_for('auth.login'))
+    else:
+        return redirect(url_for('order.index',pageNumber=1))
+        
 
 
 
