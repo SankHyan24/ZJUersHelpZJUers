@@ -1,11 +1,19 @@
 我创建的订单：
-    orderState NULL:创建未被接单
+    orderState NULL:创建未被接单 //此状态显示一个按钮：撤销
     orderState 1：待确认 #TODO //此状态下显示俩按钮：确认 和 取消
     orderState 2：订单进行中
     orderState 3：订单完成 //此状态下显示评价按钮（后面再说）
 
 g.history["historylist_accepted"]:(OID,(startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState))
 g.history["historylist_created"]:(OID,(startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState))
+
+//撤销按钮 fetch里填'/quash_order/'+ {{order[0][0]}}
+//确认按钮 fetch里填'/confirm_order/'+ {{order[0][0]}}
+//取消按钮 fetch里填'/cancel_order/'+ {{order[0][0]}}
+//评价按钮 后面再说 先搞个假的
+
+？还有个计时功能不知道怎么实现
+
 
 //button传参可以用川川提供的方式解决（把操作的订单的OID传回来）：
 <input id="order_{{order[0][0]}}" type="button" value="完成订单"/>

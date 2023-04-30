@@ -86,5 +86,28 @@ def history_order():
 @bp.route("/complete_order/<int:OID>",methods=["POST"])
 @login_required
 def complete_order(OID):
-    completeOrderInDatabase(OID)
+    changeOrderState(OID, 3)
     return redirect(url_for("user.userinfo"))
+
+""" @bp.route("/confirm_order/<int:OID>",methods=["POST"])
+@login_required
+def confirm_order(OID):
+    changeOrderState(OID, 2)
+    return redirect(url_for("user.userinfo"))
+
+@bp.route("/cancel_order/<int:OID>",methods=["POST"])
+@login_required
+def confirm_order(OID):
+    changeOrderState(OID, 1)
+    return redirect(url_for("user.userinfo"))
+
+@bp.route("/quash_order/<int:OID>",methods=["POST"])
+@login_required
+def confirm_order(OID):
+    changeOrderState(OID, NULL)
+    return redirect(url_for("user.userinfo")) """
+
+
+
+
+

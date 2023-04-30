@@ -123,12 +123,12 @@ def return_ordereeID_OID(user_id:int):
         error = f"Get orders failed."
         flash(error)
 
-def completeOrderInDatabase(OID):
-    query = "UPDATE orderInfo SET orderState = 3 WHERE OID = " + str(OID)
+def changeOrderState(OID,state):
+    query = "UPDATE orderInfo SET orderState = " + str(state) + " WHERE OID = " + str(OID)
     db = get_db()
     try:
         db.execute(query)
         db.connection.commit()
     except db.IntegiryError:
-        error = f"Complete order failed."
+        error = f"Change orderstate failed."
         flash(error)
