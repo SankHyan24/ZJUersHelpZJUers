@@ -25,6 +25,7 @@ def create_order():
             return render_template("order/create_order.html",form_create_order=form_create_order) # TODO: render html template
 
 @bp.route("/<int:pageNumber>",methods=["GET"])
+@login_required
 def index(pageNumber):
     if request.method == 'GET':
         oldOID = return_latest_ID(pageNumber)
@@ -46,6 +47,7 @@ def null_index():
         return redirect(url_for('order.index',pageNumber=1))
         
 @bp.route("/search_order/<token>",methods=["GET"])
+@login_required
 def search_order(token):
     search_result_form=get_search_result(token)
     # print(search_result_form)
@@ -58,6 +60,7 @@ def search_order(token):
     return render_template('order/search_order.html',search_result_form=search_result_form)
 
 @bp.route("/acc_order/<int:OID>",methods=["POST"])
+@login_required
 def acc_order(OID):
     if acc_order_ID(OID,session['user_uid']) is True:
         return redirect(url_for("user.userinfo"))
@@ -65,4 +68,16 @@ def acc_order(OID):
         flash("Error! Others have already accepted this order!")# 前端无法正确显示flash中的内容
         return "Error! Others have already accepted this order!"
 
-    
+@bp.route("/history_order",methods=["GET"])
+@login_required
+def history_order():
+    g.history = {}
+    historylist_created=[]
+    for OID in return_ordererID_OID(session['user_uid']):
+        historylist_created.append((OID,getFormData(OID[0])))
+    g.history["historylist_created"] = historylist_created
+    historylist_accepted=[]
+    for OID in return_ordereeID_OID(session['user_uid']):
+        historylist_accepted.append((OID,getFormData(OID[0])))
+    g.history["historylist_accepted"] = historylist_accepted
+    return render_template('order/history_order.html')

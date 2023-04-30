@@ -11,8 +11,8 @@
       <img id="ava" src = "../../static/2.jpg"></img>
       <br><hr><br>
       <button id="avabutton" onclick="OnChangeUserInfo(this)">修改个人信息</button><br>
-      <button id="avabutton">查看历史订单</button><br>
-      <button id="avabutton">还有什么来着</button><br>
+      <button id="avabutton" onclick="JumpToHistoryOrder()" >查看历史订单</button><br>
+      <button id="avabutton">还有什么来着</button><br>  
     </div>
 
 
@@ -77,7 +77,10 @@
       document.getElementById("left_change").style.display = "inline-block";
       obj.innerHTML = "显示个人信息";
     }
-    
+  }
+
+  function JumpToHistoryOrder(){
+    window.location.href = "/history_order";
   }
 </script>
 

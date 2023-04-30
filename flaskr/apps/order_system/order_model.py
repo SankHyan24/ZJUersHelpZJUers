@@ -43,7 +43,6 @@ def order_create(user_id:int, data): # TODO test
         flash(error)
 
 def return_latest_ID(pageNumber:int):
-    
     query = "SELECT OID FROM orderInfo ORDER BY startTime DESC LIMIT 20 OFFSET " + str((pageNumber-1) * 20)
     db = get_db()
     try:
@@ -56,7 +55,7 @@ def return_latest_ID(pageNumber:int):
         flash(error)
 
 def getFormData(OID:int):
-    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum FROM orderInfo WHERE OID = " + str(OID)
+    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID FROM orderInfo WHERE OID = " + str(OID)
     db = get_db()
     try:
         db.execute(query)
@@ -100,3 +99,26 @@ def acc_order_ID(OID:int, user_id:int):
     return True
     
     
+def return_ordererID_OID(user_id:int):
+    query = "SELECT OID FROM orderInfo where ordererID = " + str(user_id)
+    db = get_db()
+    print(query)
+    try:
+        db.execute(query)
+        OID = db.fetchall()
+        return OID
+    except db.IntegrityError:
+        error = f"Get orders failed."
+        flash(error)
+        
+def return_ordereeID_OID(user_id:int):
+    query = "SELECT OID FROM orderInfo where ordereeID = " + str(user_id)
+    db = get_db()
+    print(query)
+    try:
+        db.execute(query)
+        OID = db.fetchall()
+        return OID
+    except db.IntegrityError:
+        error = f"Get orders failed."
+        flash(error)
