@@ -55,7 +55,7 @@ def return_latest_ID(pageNumber:int):
         flash(error)
 
 def getFormData(OID:int):
-    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID FROM orderInfo WHERE OID = " + str(OID)
+    query = "SELECT startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState FROM orderInfo WHERE OID = " + str(OID)
     db = get_db()
     try:
         db.execute(query)

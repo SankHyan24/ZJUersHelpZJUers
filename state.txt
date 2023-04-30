@@ -1,0 +1,7 @@
+state NULL:创建未被接单
+state 1：待确认 #TODO
+state 2：订单进行中
+state 3：订单完成
+
+g.history["historylist_accepted"]:(OID,(startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState))
+g.history["historylist_created"]:(OID,(startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState))
