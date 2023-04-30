@@ -7,7 +7,7 @@
 g.history["historylist_accepted"]:(OID,(startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState))
 g.history["historylist_created"]:(OID,(startTime, dueTime, remark, location, moneyNum, chuanCoinsNum, ordererID, orderState))
 
-//button传参可以用川川提供的方式解决：
+//button传参可以用川川提供的方式解决（把操作的订单的OID传回来）：
 <input id="order_{{order[0][0]}}" type="button" value="完成订单"/>
       <script>
         // accept order part:
