@@ -112,7 +112,7 @@ def return_ordererID_OID(user_id:int):
         flash(error)
         
 def return_ordereeID_OID(user_id:int):
-    query = "SELECT OID FROM orderInfo where ordereeID = " + str(user_id)
+    query = "SELECT OID FROM orderInfo where ordereeID = " + str(user_id) + " AND orderState = 1"
     db = get_db()
     print(query)
     try:
@@ -121,4 +121,14 @@ def return_ordereeID_OID(user_id:int):
         return OID
     except db.IntegrityError:
         error = f"Get orders failed."
+        flash(error)
+
+def completeOrderInDatabase(OID):
+    query = "UPDATE orderInfo SET orderState = 3 WHERE OID = " + str(OID)
+    db = get_db()
+    try:
+        db.execute(query)
+        db.connection.commit()
+    except db.IntegiryError:
+        error = f"Complete order failed."
         flash(error)

@@ -68,16 +68,23 @@ def acc_order(OID):
         flash("Error! Others have already accepted this order!")# 前端无法正确显示flash中的内容
         return "Error! Others have already accepted this order!"
 
-@bp.route("/history_order",methods=["GET"])
+@bp.route("/history_order",methods=["GET","POST"])
 @login_required
 def history_order():
-    g.history = {}
-    historylist_created=[]
-    for OID in return_ordererID_OID(session['user_uid']):
-        historylist_created.append((OID,getFormData(OID[0])))
-    g.history["historylist_created"] = historylist_created
-    historylist_accepted=[]
-    for OID in return_ordereeID_OID(session['user_uid']):
-        historylist_accepted.append((OID,getFormData(OID[0])))
-    g.history["historylist_accepted"] = historylist_accepted
-    return render_template('order/history_order.html')
+    if request.method == "GET":
+        g.history = {}
+        historylist_created=[]
+        for OID in return_ordererID_OID(session['user_uid']):
+            historylist_created.append((OID,getFormData(OID[0])))
+        g.history["historylist_created"] = historylist_created
+        historylist_accepted=[]
+        for OID in return_ordereeID_OID(session['user_uid']):
+            historylist_accepted.append((OID,getFormData(OID[0])))
+        g.history["historylist_accepted"] = historylist_accepted
+        return render_template('order/history_order.html')
+
+@bp.route("/complete_order/<int:OID>",methods=["POST"])
+@login_required
+def complete_order(OID):
+    completeOrderInDatabase(OID)
+    return redirect(url_for("user.userinfo"))

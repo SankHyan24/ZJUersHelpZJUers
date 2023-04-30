@@ -35,6 +35,29 @@
         <span>moneyNum:{{ order[1][4] }}  ||  </span>
         <span>chuanCoinsNum:{{ order[1][5] }}</span>
     </p>
+    <input id="order_{{order[0][0]}}" type="button" value="完成订单"/>
+      <script>
+        // accept order part:
+        //   by click the button, send a post request to the server
+        //   and then redirect to the userinfo page if success
+        //   or alert the error message if failed (backend process)
+        const order_button_{{order[0][0]}} = document.querySelector('#order_{{order[0][0]}}');
+        order_button_{{order[0][0]}}.addEventListener('click', () => {
+          // 执行成功后跳转到历史订单页面。由于现在没有所以跳到user info
+          // 执行失败后弹出错误信息。 但是这个页面无法正确显示flash信息（参考register失败时返回的信息）
+          fetch('/complete_order/'+{{order[0][0]}}, {
+            method: 'POST',
+            body: JSON.stringify({
+            })
+          })
+          .then(data=>{
+            console.log(data);
+            return data;})
+          .then(data =>{
+            if(data["redirected"]) window.location.href = data["url"];
+          });
+        });
+      </script>
     </div>
     {% endfor %}
 
