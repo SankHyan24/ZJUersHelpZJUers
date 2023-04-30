@@ -84,7 +84,7 @@ def register():
             error = "Email is required."
         elif not password:
             error = "Password is required."
-
+        flash(error)
         if error is None:
             try:
                 db.execute(query)
@@ -96,8 +96,6 @@ def register():
             else:
                 # Success, go to the login page.
                 return redirect(url_for("auth.login"))
-
-        flash(error)
     return render_template("auth/register.html")
 
 @bp.route("/login", methods=("GET", "POST"))

@@ -18,7 +18,7 @@ def create_order():
         print(form_create_order.dueTime)
         if form_create_order.validate():
             order_create(session['user_uid'], form_create_order.data)
-            return redirect(url_for('order.index')) # TODO: redirect url
+            return redirect(url_for('order.index',pageNumber = 1)) # TODO: redirect url
         else:
             print(form_create_order.errors, "Error Message")
 
@@ -45,9 +45,6 @@ def null_index():
     else:
         return redirect(url_for('order.index',pageNumber=1))
         
-
-
-
 @bp.route("/search_order/<token>",methods=["GET"])
 def search_order(token):
     search_result_form=get_search_result(token)
@@ -60,5 +57,12 @@ def search_order(token):
     g.search["searchlist"] = searchlist
     return render_template('order/search_order.html',search_result_form=search_result_form)
 
+@bp.route("/acc_order/<int:OID>",methods=["POST"])
+def acc_order(OID):
+    if acc_order_ID(OID,session['user_uid']) is True:
+        return redirect(url_for("user.userinfo"))
+    else:
+        flash("Error! Others have already accepted this order!")# 前端无法正确显示flash中的内容
+        return "Error! Others have already accepted this order!"
 
     
