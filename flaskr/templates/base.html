@@ -1,6 +1,9 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='input.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='circle.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='button.css') }}">
 
 
 <nav>
@@ -39,5 +42,6 @@
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
   {% endfor %}
+  <div>{ message }</div>
   {% block content %}{% endblock %}
 </section>
