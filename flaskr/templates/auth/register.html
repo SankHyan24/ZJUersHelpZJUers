@@ -6,12 +6,20 @@
 
 {% block content %}
   <form method="post">
-    {{ form_register.username.label }}
-    {{ form_register.username }}
+    <div class="form-control">
+      {{ form_register.username.label }}
+      {{ form_register.username }}
+      <span class="input-border input-border-alt"></span>
+    </div>
+
+    <form method="post">
+      <div class="form-control">
+        {{ form_register.password.label }}
+        {{ form_register.password }}
+        <span class="input-border input-border-alt"></span>
+    </div>
   
-  
-    {{ form_register.password.label }}
-    {{ form_register.password }}
+    
   
 
     {{ form_register.password2.label }}
@@ -25,9 +33,13 @@
     {{ form_register.email.label }}
     {{ form_register.email }}
   
-
-    {{ form_register.QQID.label }}
-    {{ form_register.QQID }}
+    <form method="post">
+      <div class="form-control">
+        {{ form_register.QQID.label }}
+        {{ form_register.QQID }}
+        <span class="input-border input-border-alt"></span>
+    </div>
+    
   
 
     {{ form_register.WechatID.label }}
@@ -37,9 +49,16 @@
     {{ form_register.phoneNumber.label }}
     {{ form_register.phoneNumber }}
   
-    
-    {{ form_register.submit }}
+    <button>
+      {{ form_register.submit }}
+    </button>
 
     
   </form>
+  <script>
+    style = "color: #fff;font-size: 0.9rem;background-color: transparent;width: 100%;box-sizing: border-box;padding-inline: 0.5em;padding-block: 0.7em;border: none;border-bottom: var(--border-height) solid var(--border-before-color);box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);font-size: 1.2rem;padding-inline: 1em;padding-block: 0.8em;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
+    sb = document.getElementById("submit");
+    sb.style = "box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);";
+    console.log(1);
+  </script>
 {% endblock %}

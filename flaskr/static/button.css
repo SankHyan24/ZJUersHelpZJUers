@@ -11,7 +11,7 @@ button {
    }
    
    button.learn-more {
-    font-weight: 600;
+    font-weight: 600px;
     color: #382b22;
     text-transform: uppercase;
     padding: 1.25em 2em;

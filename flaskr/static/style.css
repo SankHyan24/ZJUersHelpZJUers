@@ -59,10 +59,11 @@ nav ul li a, nav ul li span, header .action {
 }
 
 .content {
-  margin:3%;
-  height: 90%;
+  /* margin:3%; */
+  /* height: 90%; */
+  background-color:#eee;
   padding: 0 1rem 1rem;
-  background-image: url("./11.png");
+  /* background-image: url("./11.png"); */
   background-size: cover;  
 }
 
@@ -140,8 +141,6 @@ input.danger {
 input[type=submit] {
   align-self: start;
   min-width: 10em;
-  border-radius: 10px;
-  color: #66ccff;
 }
 .content #demo {
   margin-left: 40%;

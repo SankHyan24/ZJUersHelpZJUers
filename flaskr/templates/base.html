@@ -3,13 +3,14 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='input.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='circle.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='button.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='button2.css') }}">
 
 
 <nav>
   <h1><a href="{{ url_for('index') }}">Flaskr</a></h1>
-  <input id="search_menu"/>
-  <input id="search_button" type="button" value="search"/>
+  <input id="search_menu" style="background-color: #eee;margin-left:5%; color:black"/>
+  <button id="search_button" type="button" style="margin-right:7%;margin-left:2%;min-width: 5px; text-align: center;"value = "search" >search</button>
+  <!-- <input id="search_button" type="button" value="search"/>  -->
 
   <ul>
     {% if g.user %}
@@ -42,6 +43,5 @@
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
   {% endfor %}
-  <div>{ message }</div>
   {% block content %}{% endblock %}
 </section>
